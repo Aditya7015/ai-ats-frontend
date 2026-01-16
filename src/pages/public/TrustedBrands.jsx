@@ -22,7 +22,7 @@ const TrustedBrands = () => {
             Companies hiring from our platform
           </h2>
           <p className="text-sm text-slate-500 mt-2">
-            Top companies trust ATS-AI for hiring quality talent
+            Top companies trust TalentIQ-AI for hiring quality talent
           </p>
         </div>
 

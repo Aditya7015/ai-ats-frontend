@@ -125,6 +125,19 @@ function TrendingJobs() {
             </div>
           ))}
         </div>
+
+        {/* VIEW ALL JOBS BUTTON */}
+        <div className="mt-12 flex justify-center">
+          <Link
+            to="/candidate/jobs"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-lg
+                       bg-blue-600 text-white font-semibold
+                       hover:bg-blue-700 transition"
+          >
+            View all jobs →
+          </Link>
+        </div>
+
       </div>
     </section>
   );
