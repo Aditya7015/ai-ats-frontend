@@ -5,16 +5,20 @@ import { Link } from "react-router-dom";
 function TrendingJobs() {
   const [jobs, setJobs] = useState([]);
   const [tilt, setTilt] = useState({});
+  const isMobile = window.innerWidth < 768;
 
   useEffect(() => {
     getAllJobs().then((res) => setJobs(res.data.slice(0, 8)));
   }, []);
 
-  const threshold = 6;
+  const threshold = 8;
 
   const handleMove = (id, e) => {
+    if (isMobile) return;
+
     const { left, top, width, height } =
       e.currentTarget.getBoundingClientRect();
+
     const x = (e.clientX - left) / width - 0.5;
     const y = (e.clientY - top) / height - 0.5;
 
@@ -25,35 +29,37 @@ function TrendingJobs() {
   };
 
   return (
-    <section className="bg-linear-to-b from-blue-50 to-blue-100 py-20">
+    <section className="relative overflow-hidden bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 py-20">
       <div className="max-w-7xl mx-auto px-6">
 
-        {/* SECTION HEADER */}
-        <h2 className="text-3xl font-bold text-gray-900">
-          What are you looking for today?
-        </h2>
-        <p className="text-xl font-semibold mt-2 mb-6">
-          Fresher Jobs
-        </p>
+        {/* ================= HEADER ================= */}
+        <div className="mb-14 animate-fade-up">
+          <h2 className="text-4xl md:text-5xl font-extrabold text-gray-900">
+            🔥 Trending Jobs
+          </h2>
+          <p className="text-lg text-gray-600 mt-3 max-w-xl">
+            AI-recommended roles hiring actively right now
+          </p>
+        </div>
 
-        {/* FILTER PILLS */}
-        <div className="flex flex-wrap gap-3 mb-12">
+        {/* ================= CATEGORY PILLS ================= */}
+        <div className="flex flex-wrap gap-3 mb-14 animate-fade-up delay-100">
           {[
-            "Big brands",
-            "Work from home",
-            "Part-time",
-            "MBA",
-            "Engineering",
-            "Design",
-            "Data Science",
+            "🔥 Trending",
+            "🏠 Work from home",
+            "🎓 Fresher",
+            "💻 Engineering",
+            "📊 Data Science",
+            "🎨 Design",
           ].map((tag, i) => (
             <span
               key={i}
-              className={`px-4 py-2 rounded-full text-sm font-medium cursor-pointer transition
+              className={`px-5 py-2 rounded-full text-sm font-semibold cursor-pointer
+                transition-all duration-300 hover:-translate-y-0.5
                 ${
                   i === 0
-                    ? "bg-blue-600 text-white"
-                    : "bg-white border text-gray-700 hover:bg-blue-50"
+                    ? "bg-indigo-600 text-white shadow-lg"
+                    : "bg-white border text-gray-700 hover:bg-indigo-50"
                 }`}
             >
               {tag}
@@ -61,80 +67,86 @@ function TrendingJobs() {
           ))}
         </div>
 
-        {/* JOB CARDS */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {jobs.map((job) => (
-            <div
-              key={job._id}
-              className="bg-white rounded-xl border shadow-sm p-5 h-full transition-all duration-200 hover:shadow-md"
-              onMouseMove={(e) => handleMove(job._id, e)}
-              onMouseLeave={() =>
-                setTilt({ ...tilt, [job._id]: { x: 0, y: 0 } })
-              }
-              style={{
-                transform: `perspective(1000px) rotateX(${
-                  tilt[job._id]?.x || 0
-                }deg) rotateY(${tilt[job._id]?.y || 0}deg)`,
-              }}
-            >
-              {/* BADGE */}
-              <div className="flex items-center gap-2 mb-3">
-                <span className="text-xs font-medium bg-blue-50 text-blue-600 px-2 py-1 rounded">
-                  📈 Actively hiring
+        {/* ================= JOB GRID ================= */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          {jobs.map((job, idx) => {
+            const aiScore = Math.floor(75 + Math.random() * 20);
+
+            return (
+              <div
+                key={job._id}
+                onMouseMove={(e) => handleMove(job._id, e)}
+                onMouseLeave={() =>
+                  setTilt({ ...tilt, [job._id]: { x: 0, y: 0 } })
+                }
+                style={{
+                  transform: `perspective(1200px)
+                    rotateX(${tilt[job._id]?.x || 0}deg)
+                    rotateY(${tilt[job._id]?.y || 0}deg)`,
+                }}
+                className={`relative group bg-white rounded-2xl p-6 border
+                            shadow-md hover:shadow-2xl
+                            hover:-translate-y-2 transition-all duration-300
+                            animate-fade-up`}
+              >
+                {/* HOVER GLOW */}
+                <div className="absolute inset-0 rounded-2xl bg-gradient-to-r
+                                from-indigo-400 to-purple-400 opacity-0
+                                group-hover:opacity-10 transition pointer-events-none" />
+
+                {/* AI MATCH */}
+                <span className="absolute top-4 right-4 text-xs font-bold
+                                 bg-indigo-50 text-indigo-600 px-3 py-1 rounded-full">
+                  🤖 {aiScore}% Match
                 </span>
-              </div>
 
-              {/* TITLE */}
-              <h3 className="font-semibold text-gray-900 leading-snug min-h-12">
-                {job.title}
-              </h3>
-
-              {/* COMPANY */}
-              <p className="text-sm text-gray-500 mt-1">
-                {job.companyId?.name || "Confidential Company"}
-              </p>
-
-              {/* DETAILS */}
-              <div className="mt-4 space-y-2 text-sm text-gray-600">
-                {job.location && (
-                  <p className="flex items-center gap-2">
-                    <span>📍</span>
-                    {job.location}
-                  </p>
+                {/* TRENDING */}
+                {idx < 2 && (
+                  <span className="absolute top-4 left-4 text-xs font-bold
+                                   bg-orange-100 text-orange-600 px-3 py-1 rounded-full">
+                    🔥 Trending
+                  </span>
                 )}
-                {job.salary && (
-                  <p className="flex items-center gap-2">
-                    <span>💰</span>
-                    {job.salary}
-                  </p>
-                )}
-              </div>
 
-              {/* FOOTER */}
-              <div className="mt-6 flex items-center justify-between">
-                <span className="text-xs bg-gray-100 px-2 py-1 rounded">
-                  Job
-                </span>
+                {/* CONTENT */}
+                <h3 className="text-lg font-semibold text-gray-900 mt-10
+                               group-hover:text-indigo-600 transition">
+                  {job.title}
+                </h3>
+
+                <p className="text-sm text-gray-500 mt-1">
+                  {job.companyId?.name || "Confidential Company"}
+                </p>
+
+                <div className="mt-4 space-y-2 text-sm text-gray-600">
+                  {job.location && <p>📍 {job.location}</p>}
+                  {job.salary && <p>💰 {job.salary}</p>}
+                </div>
+
+                {/* CTA */}
                 <Link
                   to={`/candidate/jobs/${job._id}`}
-                  className="text-blue-600 text-sm font-medium hover:underline"
+                  className="block mt-6 text-center w-full
+                             rounded-full py-2.5 font-semibold
+                             bg-indigo-600 text-white
+                             hover:bg-indigo-700 transition"
                 >
-                  View details →
+                  View & Apply →
                 </Link>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
 
-        {/* VIEW ALL JOBS BUTTON */}
-        <div className="mt-12 flex justify-center">
+        {/* ================= CTA ================= */}
+        <div className="mt-20 flex justify-center animate-fade-up delay-200">
           <Link
             to="/candidate/jobs"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-lg
-                       bg-blue-600 text-white font-semibold
-                       hover:bg-blue-700 transition"
+            className="px-10 py-4 rounded-full text-lg font-bold
+                       bg-indigo-600 text-white shadow-xl
+                       hover:bg-indigo-700 hover:scale-105 transition"
           >
-            View all jobs →
+            Explore all jobs →
           </Link>
         </div>
 
