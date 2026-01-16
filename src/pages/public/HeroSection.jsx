@@ -51,7 +51,7 @@ function HeroSection() {
         {!token && (
           <>
             <Link
-              to="/jobs"
+              to="/candidate/jobs"
               className="bg-indigo-600 hover:bg-indigo-700 text-white rounded-full px-8 h-12 flex items-center transition"
             >
               Find Jobs
