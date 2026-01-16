@@ -1,3 +1,5 @@
+import footer_logo from '../assets/footer_logo.png'
+
 function Footer() {
   return (
     <footer className="bg-slate-900 text-slate-300 px-6 pt-14 md:px-16 lg:px-36 w-full">
@@ -7,13 +9,17 @@ function Footer() {
 
         {/* Brand */}
         <div className="max-w-sm">
-          <h2 className="text-2xl font-bold text-white">
-            AI Hire
-          </h2>
+          {/* LOGO */}
+          <img
+  src={footer_logo}
+  alt="TalentIQ AI Logo"
+  className="h-25 mb-4 brightness-0 invert"
+/>
 
-          <p className="mt-4 text-sm text-slate-400 leading-relaxed">
+
+          <p className="text-sm text-slate-400 leading-relaxed">
             AI-powered job & internship platform helping freshers and recruiters
-            connect faster with smart resume matching and automated shortlisting.
+            connect faster with smart resume matching, ATS scoring, and automated shortlisting.
           </p>
         </div>
 
@@ -61,7 +67,7 @@ function Footer() {
 
       {/* Bottom */}
       <div className="py-6 text-center text-sm text-slate-400">
-        © {new Date().getFullYear()} AI Hire. All rights reserved.
+        © {new Date().getFullYear()} TalentIQ AI. All rights reserved.
       </div>
     </footer>
   );

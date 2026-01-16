@@ -2,6 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";
 import { logout } from "../store/authSlice";
+import logo from '../assets/logo.png'
 
 function Navbar() {
   const { token, role } = useSelector((state) => state.auth);
@@ -32,9 +33,14 @@ function Navbar() {
       <nav className="relative h-17.5 flex items-center justify-between px-6 md:px-16 lg:px-24 bg-white text-gray-900 shadow">
 
         {/* LOGO */}
-        <Link to="/" className="text-xl font-bold text-indigo-600">
-          ATS-AI
-        </Link>
+        <Link to="/" className="flex items-center">
+  <img
+    src={logo}
+    alt="TalentIQ AI"
+    className="h-14 md:h-16 lg:h-16 w-auto object-contain"
+  />
+</Link>
+
 
         {/* DESKTOP LINKS */}
         <ul className="hidden md:flex items-center space-x-8 md:pl-20 text-sm font-medium">
