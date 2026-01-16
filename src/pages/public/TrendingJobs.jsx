@@ -116,7 +116,7 @@ function TrendingJobs() {
                   Job
                 </span>
                 <Link
-                  to={`/job/${job._id}`}
+                  to={`/candidate/jobs/${job._id}`}
                   className="text-blue-600 text-sm font-medium hover:underline"
                 >
                   View details →
