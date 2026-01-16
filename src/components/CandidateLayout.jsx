@@ -9,7 +9,7 @@ function CandidateLayout({ children }) {
   const isActive = (path) => location.pathname.startsWith(path);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-100 to-indigo-100 flex">
+    <div className="min-h-screen bg-linear-to-br from-slate-100 to-indigo-100 flex">
 
       {/* ================= SIDEBAR ================= */}
       <aside

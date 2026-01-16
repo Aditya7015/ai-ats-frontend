@@ -29,7 +29,7 @@ function TrendingJobs() {
   };
 
   return (
-    <section className="relative overflow-hidden bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 py-20">
+    <section className="relative overflow-hidden bg-linear-to-br from-blue-50 via-indigo-50 to-purple-50 py-20">
       <div className="max-w-7xl mx-auto px-6">
 
         {/* ================= HEADER ================= */}
@@ -90,7 +90,7 @@ function TrendingJobs() {
                             animate-fade-up`}
               >
                 {/* HOVER GLOW */}
-                <div className="absolute inset-0 rounded-2xl bg-gradient-to-r
+                <div className="absolute inset-0 rounded-2xl bg-linear-to-r
                                 from-indigo-400 to-purple-400 opacity-0
                                 group-hover:opacity-10 transition pointer-events-none" />
 

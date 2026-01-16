@@ -33,7 +33,7 @@ function Navbar() {
     <header className="sticky top-0 z-50 w-full">
 
       {/* ================= PROMO BAR ================= */}
-      <div className="bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-500
+      <div className="bg-linear-to-r from-indigo-600 via-purple-600 to-pink-500
                       text-white text-center py-2 text-xs sm:text-sm font-medium">
         🚀 AI Resume Builder at 50% off —{" "}
         <span className="underline underline-offset-2 cursor-pointer">
@@ -148,14 +148,14 @@ function Navbar() {
       {/* ================= BACKDROP ================= */}
       {menuOpen && (
         <div
-          className="fixed inset-0 z-[9998] bg-black/30 backdrop-blur-sm lg:hidden"
+          className="fixed inset-0 z-9998 bg-black/30 backdrop-blur-sm lg:hidden"
           onClick={() => setMenuOpen(false)}
         />
       )}
 
       {/* ================= MOBILE MENU (FULL SCREEN) ================= */}
       <div
-        className={`fixed inset-0 z-[9999] bg-white lg:hidden
+        className={`fixed inset-0 z-9999 bg-white lg:hidden
                     transition-transform duration-300 ease-in-out
                     ${menuOpen ? "translate-y-0" : "-translate-y-full"}`}
       >
