@@ -273,7 +273,7 @@ const handleAnalyzeDiversity = async () => {
         </div>
         
         {ranking && (
-          <div className="mt-4 p-4 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl">
+          <div className="mt-4 p-4 bg-linear-to-r from-blue-50 to-indigo-50 rounded-xl">
             <h3 className="font-semibold text-gray-800 mb-2">AI Ranking Results:</h3>
             <div className="flex flex-wrap gap-2">
               {ranking.ranking?.slice(0, 5).map((rank, idx) => (
@@ -344,7 +344,7 @@ const handleAnalyzeDiversity = async () => {
 
                 {/* TOP */}
                 <div className="flex items-center gap-4 mb-4">
-                  <div className="w-14 h-14 bg-gradient-to-br from-blue-500 to-indigo-600 text-white rounded-xl flex items-center justify-center text-lg font-bold">
+                  <div className="w-14 h-14 bg-linear-to-br from-blue-500 to-indigo-600 text-white rounded-xl flex items-center justify-center text-lg font-bold">
                     {a.candidateId?.name?.[0]?.toUpperCase() || "C"}
                   </div>
 
